@@ -1,0 +1,70 @@
+<html>
+<head>
+<style>
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    var video = document.getElementById('video');
+    var source = document.createElement('source');
+
+    source.setAttribute('src', 'videoe/video1.avi');
+
+    video.appendChild(source);
+    video.play();
+
+    setTimeout(function() {
+        video.pause();
+
+       source.setAttribute('src', 'videoe/video2.avi');
+
+        video.load();
+        video.play();
+    }, 3000);
+
+    var connection = new WebSocket("ws://localhost:8000/websocketserver");
+    // When the connection is open, send some data to the server
+    connection.onopen = function () {
+      connection.send('Ping'); // Send the message 'Ping' to the server
+    };
+
+    // Log errors
+    connection.onerror = function (error) {
+      console.log('WebSocket Error ' + error);
+    };
+
+    // Log messages from the server
+    connection.onmessage = function (e) {
+      console.log('Server: ' + e.data);
+    };
+});
+</script>
+
+</head>
+<body>
+    <div class="fullscreen-bg">
+        <video id="video" loop muted autoplay class="fullscreen-bg__video">
+        <!-- <source src="videoe/video1.avi" type="video/mp4"> -->
+        Your browser does not support the video tag.
+        </video>
+    </div>
+</body>
+</html>
