@@ -22,15 +22,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 
-
+var action = {
+      0:[0,1,2],
+      1:[0,1,2],
+      2:[3],
+      3:[0,1,2]
+  };
+var eventNode = [1,2];
+var currentNode =0;
+function getNextNode(){
+    var possibility=action[""+currentNode];
+    console.log("Mi trovo in "+currentNode+"ho ben "+possibility+" ovvero ho "+possibility.length+" scelte");
+    var p= parseInt(Math.random()*possibility.length);
+    console.log(p);
+    var chose = possibility[p];
+    currentNode = chose;
+    return chose;
+}
 
 $(document).ready(function(){
     var video=[];
     video[0] = document.getElementById('video0');
     video[1] = document.getElementById('video1');
 
-    function prepareNextVideo(idxVideo,source,time,src){
+    function prepareNextVideo(idxVideo,source,time){
       setTimeout(function() {
+
+        var p= getNextNode();
+        var src= "video/"+p+".avi";
          $(source).attr("src",src)
 
           video[idxVideo].load();
@@ -50,41 +69,19 @@ $(document).ready(function(){
       $("#video1").hide();
       var duration=video[0].duration;
       console.log("duration is "+duration);
-      prepareNextVideo(1,'#v1',duration*1000-200,"video/1.avi");
+      prepareNextVideo(1,'#v1',duration*1000-200);
     });
     $("#video1").on('playing',function(){
       $("#video1").show();
       $("#video0").hide();
       var duration=video[1].duration;
       console.log("duration is "+duration);
-      prepareNextVideo(0,'#v0',duration*1000-200,"video/0.avi");
+      prepareNextVideo(0,'#v0',duration*1000-200);
     });
 
-    //source.setAttribute('src', 'video/0.avi');
 
-    //video.appendChild(source);
-    //$("#video").play();
-
-    /*setTimeout(function() {
-        video.pause();
-
-       source.setAttribute('src', 'video/1.avi');
-
-        video.load();
-        video.play();
-    }, 3000);*/
-
-    $("#video").on('ended',function(){
-      console.log("help");
-      if(i==0){
-        i=1;
-      }else {
-        i=0;
-      }
-      $("source").attr("src","video/"+i+".avi");
-      video.load();
-      video.play();
-    });
+    //$("#video").on('ended',function(){
+    //});
 
 
     var connection = new WebSocket("ws://localhost:8000/websocketserver");
