@@ -1,25 +1,32 @@
 class BrainSentence:
 
-    names = ['danger','giulia','elena','elf','momo','diana','claudia']
+    names = ['silvia','claudia','elf','alessandra','gaia','elena','sunti','giulia','morg','momo','filippo','diana','lorenzo','daffo']
     verbs = {
                 "i'm":"saluta",
                 'am':'saluta',
                 'is':'saluta',
-                'who are you':'intoduci'
+                'who are you':"introduci",
+                'happy new year':"newyear",
+                'what are you':"painting",
+                'are you death':"no",
+                'fuck':"lose",
+                'tell me the riddle':"riddle",
+                'twelve':"correct",
             }
+
     action = {
-        0:[0,1,3,10],
-        1:[0,3],
-        2:[0,3],
-        3:[0,1,2,3],
-        10:[0,11],
-        11:[12,13],
-        12:[10],
-        13:[14],
-        14:[15],
-        15:[12,13]
+            "saluta":["Hello [], nice to meet you, I'm Amros Black named as the raven.","none"],
+            "introduci":["introduci","happy"], #I'm Amaros Black from the glorius Black family, I'm a famous painter in my time, and now I'm just hanging around. Hoping not to have an hanghover...
+            "newyear":["happy new year","happy"],
+            "painting":["I'm painting a naked lady","none"],#I'm just painting a naked lady, but it's hard sometimes remembering her face
+            "no":["Absolutely no","none"],
+            "lose":["Any prefect around I wanna slipt 10 point to this ugly guy","angry"],
+            "riddle":["How many uses of dragon blood did DUmbledore discover?","none"],
+            "correct":["you are right! good boy","happy"]
+
     }
-    eventNode = [1,2]
+
+    emotion = ['none','happy','angry'];
 
     def __init__(self, sentence):
         self.sentence = sentence

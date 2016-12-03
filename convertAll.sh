@@ -1,0 +1,31 @@
+
+echo "comincio la conversione"
+script MVI_7855.MOV
+script MVI_7856.MOV
+script MVI_7857.MOV
+script MVI_7858.MOV
+script MVI_7859.MOV
+script MVI_7860.MOV
+script MVI_7861.MOV
+script MVI_7862.MOV
+script MVI_7863.MOV
+script MVI_7864.MOV
+script MVI_7865.MOV
+script MVI_7867.MOV
+script MVI_7868.MOV
+script MVI_7869.MOV
+script MVI_7870.MOV
+script MVI_7871.MOV
+script MVI_7872.MOV
+script MVI_7873.MOV
+script MVI_7874.MOV
+script MVI_7875.MOV
+script MVI_7876.MOV
+script MVI_7877.MOV
+script MVI_7878.MOV
+script MVI_7879.MOV
+script MVI_7880.MOV
+script MVI_7881.MOV
+script MVI_7882.MOV
+script MVI_7883.MOV
+script MVI_7884.MOV

@@ -16,18 +16,22 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    //height: 100%;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 
-var action = {
+/*var action = {
       0:[0,1,2],
       1:[0,1,2],
       2:[3],
       3:[0,1,2]
-  };
+  };*/
+var action ={
+    0:[0],
+    1:[0],
+}
 var eventNode = [1,2];
 var currentNode =0;
 function getNextNode(){
@@ -41,6 +45,8 @@ function getNextNode(){
 }
 
 $(document).ready(function(){
+    // full-screen available?
+
     var video=[];
     video[0] = document.getElementById('video0');
     video[1] = document.getElementById('video1');
@@ -49,7 +55,7 @@ $(document).ready(function(){
       setTimeout(function() {
 
         var p= getNextNode();
-        var src= "video/"+p+".avi";
+        var src= "video/"+p+".MOV";
          $(source).attr("src",src)
 
           video[idxVideo].load();
@@ -60,7 +66,7 @@ $(document).ready(function(){
     }
     /*var source = document.createElement('source');*/
 
-    $("#video0").html('<source id="v0" src="video/0.avi" type="video/mp4">');
+    $("#video0").html('<source id="v0" src="video/0.MOV" type="video/mp4">');
     $("#video1").html('<source id="v1" src="" type="video/mp4">');
 
     var i=0;
@@ -103,7 +109,7 @@ $(document).ready(function(){
 </script>
 
 </head>
-<body>
+<body id="body">
     <div class="fullscreen-bg">
       <!-- loop -->
         <video id="video0" muted autoplay class="fullscreen-bg__video">

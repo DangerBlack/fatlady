@@ -1,2 +1,6 @@
 *.avi
+*.MOV
+*.mp3
+working/*
+working_testing/*
 idea/*
