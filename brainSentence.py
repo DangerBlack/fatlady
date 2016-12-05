@@ -51,15 +51,25 @@ class BrainSentence:
                 if(not hasName):
                     #print 'trovato['+v+']: '+self.verbs[v]
                     selected_verb = self.verbs[v]
-        if("NAME" in self.action[selected_verb][0]):
-            selected_action=[self.action[selected_verb][0].replace("NAME",selected_name),self.action[selected_verb][1]]
+        if(selected_verb != ''):
+            if("NAME" in self.action[selected_verb][0]):
+                if(selected_name != ''):
+                    selected_action=[self.action[selected_verb][0].replace("NAME",selected_name),self.action[selected_verb][1]]
+                else:
+                    selected_action=[]
+            else:
+                selected_action=self.action[selected_verb]
+            return selected_action
         else:
-            selected_action=self.action[selected_verb]
-        return selected_action
+            return []
 
 bs = BrainSentence('who are you')
 print(bs.deduce())
 bs = BrainSentence("hi i'm claudia")
 print(bs.deduce())
 bs = BrainSentence("hi i am claudia")
+print(bs.deduce())
+bs = BrainSentence("hi i am asdrubale")
+print(bs.deduce())
+bs = BrainSentence("bless you claudia")
 print(bs.deduce())
