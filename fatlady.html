@@ -22,6 +22,42 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 
+function Sound(source,volume,loop)
+{
+    this.source=source;
+    this.volume=volume;
+    this.loop=loop;
+    var son;
+    this.son=son;
+    this.finish=false;
+    this.stop=function()
+    {
+        document.body.removeChild(this.son);
+    }
+    this.start=function()
+    {
+        if(this.finish)return false;
+        this.son=document.createElement("embed");
+        this.son.setAttribute("src",this.source);
+        this.son.setAttribute("hidden","true");
+        this.son.setAttribute("volume",this.volume);
+        this.son.setAttribute("autostart","true");
+        this.son.setAttribute("loop",this.loop);
+        document.body.appendChild(this.son);
+    }
+    this.remove=function()
+    {
+        document.body.removeChild(this.son);
+        this.finish=true;
+    }
+    this.init=function(volume,loop)
+    {
+        this.finish=false;
+        this.volume=volume;
+        this.loop=loop;
+    }
+}
+
 /*var action = {
       0:[0,1,2],
       1:[0,1,2],
@@ -50,7 +86,7 @@ var action ={
     18:[[14,17,19,20,21,22,23],[12,13]],
     19:[[14,17,19,19,20,20,21,21,22,23],[12,13]],
     20:[[14,17,19,19,20,20,21,21,22,23],[12,13]],
-    21:[[14,17,19,19.20,20.21,21,22,23],[12,13]],
+    21:[[14,17,19,19.20,20,21,21,22,23],[12,13]],
     22:[[0,1,2,3,4,5,6,11],[7,8,9,10,24,25]],
     23:[[0,1,2,3,4,5,6,11,27],[7,8,9,10,24,25]],
     24:[[0,1,2,3,4,5,6,11],[7,8,9,10,24,25]],
@@ -61,18 +97,30 @@ var action ={
 }
 var eventNode = [7,8,9,10,24,25,12,13];
 
+var requestEvent = [];
+
 var currentNode =0;
 function getNextNode(){
-    var possibility=action[""+currentNode];
+    if(requestEvent.length==0){
+        var possibility=action[""+currentNode];
 
-    var p=0;
-    var chose=0;
-    console.log("Mi trovo in "+currentNode+" ho ben "+possibility+" ovvero ho "+possibility.length+" scelte");
-    p= parseInt(Math.random()*possibility[0].length);
-    chose = possibility[0][p];
-    console.log("Faccio la scelta numero "+p+" ovvero vado in "+chose);
+        var p=0;
+        var chose=0;
+        console.log("Mi trovo in "+currentNode+" ho ben "+possibility+" ovvero ho "+possibility.length+" scelte");
+        p= parseInt(Math.random()*possibility[0].length);
+        chose = possibility[0][p];
+        console.log("Faccio la scelta numero "+p+" ovvero vado in "+chose);
 
-    currentNode = chose;
+        currentNode = chose;
+    }else{
+        event = requestEvent.pop();
+        chose = event[0];
+
+        setTimeout(function(){
+            var foo=new Sound("audio/"+event[1],100,false);
+            foo.start();
+        },500);
+    }
     return chose;
 }
 
@@ -136,6 +184,12 @@ $(document).ready(function(){
     // Log messages from the server
     connection.onmessage = function (e) {
       console.log('Server: ' + e.data);
+      var data= e.data.replace('\'','\"');
+
+      var js=JSON.parse(data);
+      //var foo=new Sound("audio/"+js[0],100,false);
+      //foo.start();
+      requestEvent.push([10,js[0]]);
     };
 });
 </script>

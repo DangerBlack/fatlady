@@ -21,7 +21,7 @@ import socket
 import thread
 import time
 import speech_recognition as sr
-form brainSentence import BrainSentence
+from brainSentence import BrainSentence
 
 r = sr.Recognizer()
 
@@ -37,7 +37,7 @@ class MyWebSocketServer(tornado.websocket.WebSocketHandler):
             bs = BrainSentence(message)
             output_message=bs.deduce()
             if(output_message!=[]):
-                self.write_message(str(output_message),False)
+                self.write_message(str(output_message).replace('\'','"'),False)
             print("Sphinx thinks you said " + message )
         except sr.UnknownValueError:
             print("Sphinx could not understand audio")

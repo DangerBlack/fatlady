@@ -15,7 +15,7 @@ class BrainSentence:
             }
 
     action = {
-            "saluta":["salutaNAME.mp3","none"],
+            "saluta":["saluta_NAME.mp3","none"],
             "introduci":["introduci.mp3","happy"], #I'm Amaros Black from the glorius Black family, I'm a famous painter in my time, and now I'm just hanging around. Hoping not to have an hanghover...
             "newyear":["happynewyear.mp3","happy"],
             "painting":["painting.mp3","none"],#I'm just painting a naked lady, but it's hard sometimes remembering her face
