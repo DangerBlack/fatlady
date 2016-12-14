@@ -86,7 +86,7 @@ var action ={
     18:[[14,17,19,20,21,22,23],[12,13]],
     19:[[14,17,19,19,20,20,21,21,22,23],[12,13]],
     20:[[14,17,19,19,20,20,21,21,22,23],[12,13]],
-    21:[[14,17,19,19.20,20,21,21,22,23],[12,13]],
+    21:[[14,17,19,19,20,20,21,21,22,23],[12,13]],
     22:[[0,1,2,3,4,5,6,11],[7,8,9,10,24,25]],
     23:[[0,1,2,3,4,5,6,11,27],[7,8,9,10,24,25]],
     24:[[0,1,2,3,4,5,6,11],[7,8,9,10,24,25]],
@@ -98,6 +98,12 @@ var action ={
 var eventNode = [7,8,9,10,24,25,12,13];
 
 var requestEvent = [];
+
+var emotion = {
+    "none":[7,8,9,10,12],
+    "happy":[25],
+    "angry":[13,24]
+}
 
 var currentNode =0;
 function getNextNode(){
@@ -113,13 +119,21 @@ function getNextNode(){
 
         currentNode = chose;
     }else{
-        event = requestEvent.pop();
-        chose = event[0];
+        event = requestEvent.pop();//remove from list in every case
+        emo = emotion[event[0]];
+        opt = action[""+currentNode].filter(function(n) {
+            return emo.indexOf(n) != -1;
+        });
+        console.log(opt);
 
-        setTimeout(function(){
-            var foo=new Sound("audio/"+event[1],100,false);
-            foo.start();
-        },500);
+        if(opt.length>0){ //ignore the event if you can't fulfill it, could lead to quit speaking with him from bored people
+            chose = event[0];
+
+            setTimeout(function(){
+                var foo=new Sound("audio/"+event[1],100,false);
+                foo.start();
+            },500);
+        }
     }
     return chose;
 }
