@@ -1,5 +1,5 @@
 #sudo pip install tornado
-#sudo pip install SpeachRecognition
+#sudo pip install SpeechRecognition
 #sudo apt-get install python-pyaudio python3-pyaudio
 '''
 $ sudo apt-get install git
