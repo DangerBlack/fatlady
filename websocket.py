@@ -22,6 +22,7 @@ import thread
 import time
 import speech_recognition as sr
 from brainSentence import BrainSentence
+from api import *
 
 r = sr.Recognizer()
 
@@ -33,7 +34,9 @@ class MyWebSocketServer(tornado.websocket.WebSocketHandler):
             audio = r.listen(source)
 
         try:
-            message = r.recognize_sphinx(audio)
+            print(API);
+            message= r.recognize_google(audio)# key=''
+            #message = r.recognize_sphinx(audio)
             bs = BrainSentence(message)
             output_message=bs.deduce()
             if(output_message!=[]):
